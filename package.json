@@ -102,6 +102,7 @@
     "sinon": "1.17.3",
     "superagent": "1.8.3",
     "supertest": "1.2.0",
+    "uglify-js": "2.6.2",
     "updtr": "0.1.10",
     "vinyl-source-stream": "1.1.0",
     "watch": "0.17.1"
@@ -140,8 +141,8 @@
     "url": "https://github.com/keystonejs/keystone/issues"
   },
   "scripts": {
-    "build": "NODE_ENV=production gulp build-packages",
-    "build-dev": "gulp build-packages",
+    "bundle": "node build.js > ./admin/public/js/packages.js",
+    "build": "npm run bundle && uglifyjs ./admin/public/js/packages.js -mc --source-map ./admin/public/js/packages.js.map > ./admin/public/js/packages.min.js",
     "pretest": "npm run lint && node test/pretest.js",
     "test": "mocha",
     "test-all": "npm test && npm run test-e2e",
